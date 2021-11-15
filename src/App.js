@@ -1,20 +1,17 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Routes, Route, Link } from 'react-router-dom';
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+//import logo from './logo.svg';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import TutorialList from './components/tutorials-list.component';
 import AddTutorial from './components/add-tutorial.component';
 import Tutorial from './components/tutorial.component';
-import 'bootstrap';
-import $ from 'jquery';
-window.jQuery = window.$ = $;
-
 
 function App() {
   return (
     <div className="App">
-        
+      <header>
+      </header>     
       <Router>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <Link to={"/"} className="navbar-brand">
