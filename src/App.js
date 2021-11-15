@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 //import logo from './logo.svg';
-import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
+import './App.css';
 import TutorialList from './components/tutorials-list.component';
 import AddTutorial from './components/add-tutorial.component';
 import Tutorial from './components/tutorial.component';
@@ -27,7 +27,7 @@ function App() {
         <Routes>
           <Route exact path={"/"} element={<TutorialList />} />
           <Route exact path="/add" element={<AddTutorial />} />
-          <Route path="/tutorials/:id" element={<Tutorial />} />
+          <Route path="/tutorials/:Id" element={<Tutorial />} />
         </Routes>
       </Router>
     </div>

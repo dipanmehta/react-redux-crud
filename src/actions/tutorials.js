@@ -39,7 +39,13 @@ export const retrieveTutorials = () => async(dispatch) => {
 
 export const updateTutorial = (id,data) => async(dispatch) => {
     try {
-        const result = await TutorialDataService.update(id,data);
+        const updatedData = {
+            "id": id,
+            "title": data.title,
+            "description": data.description,
+            "published":data.published.toString()
+        };
+        const result = await TutorialDataService.update(id,updatedData);
         dispatch({type: UPDATE_TUTORIAL,payload:data});
 
         return Promise.resolve(result.data);
@@ -52,13 +58,18 @@ export const updateTutorial = (id,data) => async(dispatch) => {
 export const deleteTutorial = (id) => async(dispatch) => {
 
     try {
-
-        await TutorialDataService.delete(id);
+        const data = {
+            "id": id
+        };
+        const result = await TutorialDataService.delete(data);
         dispatch({type:DELETE_TUTORIAL, payload: {id}});
+
+        return Promise.resolve(result.data);
 
     } catch(error) {
 
         console.log(error);
+        return Promise.reject(error);
     }
 
 };

@@ -73,90 +73,84 @@ class TutorialList extends Component {
         const { tutorials } = this.props;
 
         return (
-            <div className="list row">
 
-                <div className="col-md-8">
-                    <div className="input-group mb-3">
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Search by title"
-                            value={searchTitle}
-                            onChange={this.onChangeSearchTitle}
-                        />
-                        <div className="input-group-append">
-                            <button className="btn btn-outline-secondary"
-                                type="button"
-                                onClick={this.findByTitle}>
-                                Search
-                            </button>
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-12">
+                        <div className="input-group mb-3">
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Search by title"
+                                value={searchTitle}
+                                onChange={this.onChangeSearchTitle}
+                            />
+                            <div className="input-group-append">
+                                <button className="btn btn-primary" type="button" onClick={this.findByTitle}>Search</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div className="row">
 
+                    <div className="col-md-6">
+                        <div className="card">
+                            <h4 className="btn btn-light">Tutorials List</h4>
+                            <ul className="list-group">
+                                {
+                                    tutorials && tutorials.length > 0 &&
+                                    tutorials.map((tutorial, index) => (
+                                        <li
+                                            className={
+                                                "list-group-item" +
+                                                    (index === currentIndex) ? "active" : ""
+                                            }
+                                            onClick={() => this.setActiveTutorial(tutorial, index)}
+                                        >
+                                            {tutorial.title}
+                                        </li>
+                                    ))
+                                }
+                            </ul>
+                        </div>
+                    </div>
 
-                <div className="col-md-6">
-                    <h4>Tutorials List</h4>
-                    <ul className="list-group">
-                        {
-                            tutorials && tutorials.length > 0 &&
-                            tutorials.map((tutorial, index) => (
-                                <li
-                                    className={
-                                        "list-group-item" +
-                                            (index === currentIndex) ? "active" : ""
-                                    }
-                                    onClick={() => this.setActiveTutorial(tutorial, index)}
-                                >
-                                    {tutorial.title}
-                                </li>
-                            ))
-                        }
-                    </ul>
-                    {tutorials && tutorials.length > 0 &&
-                        <button
-                            className="m-3 btn btn-sm btn-danger"
-                            onClick={this.removeAllTutorials}>
-                            Remove All
-                        </button>
-                    }
+                    <div className="col-md-6">
+                        <div className="card">
+                            {
+                                currentTutorial ? (
+                                    <div>
+                                        <h4>Tutorial</h4>
+                                        <div>
+                                            <label>
+                                                <strong>Title:</strong>
+                                            </label>{" "}
+                                            {currentTutorial.description}
+                                        </div>
+                                        <div>
+                                            <label>
+                                                <strong>Status:</strong>
+                                            </label>{" "}
+                                            {currentTutorial.published ? "published" : "pending"}
+                                        </div>
+                                        <Link
+                                            to={`/tutorials/${currentTutorial.Id}`}
+                                            className="btn btn-warning"
+                                        >Edit</Link>
+                                    </div>
+
+                                ) : (
+                                    tutorials && tutorials.length > 0 &&
+                                    <div>
+                                        <br />
+                                        <p>Please click on Tutorial...</p>
+                                    </div>
+                                )
+                            }
+                        </div>
+                    </div>
+
                 </div>
-
-
-                <div className="col-md-6">
-                    {
-                       
-                        currentTutorial ? (
-                            <div>
-                                <h4>Tutorial</h4>
-                                <div>
-                                    <label>
-                                        <strong>Title:</strong>
-                                    </label>{" "}
-                                    {currentTutorial.description}
-                                </div>
-                                <div>
-                                    <label>
-                                        <strong>Status:</strong>
-                                    </label>{" "}
-                                    {currentTutorial.published ? "published" : "pending"}
-                                </div>
-                                <Link
-                                    to={"/tutorials/" + currentTutorial.id}
-                                    className="badge badge-warning"
-                                >Edit</Link>
-                            </div>
-
-                        ) : (
-                            tutorials && tutorials.length > 0 &&
-                            <div>
-                                <br />
-                                <p>Please click on Tutorial...</p>
-                            </div>
-                        )
-                    }
-                </div>
-
             </div>
         );
     }

@@ -7,7 +7,7 @@ class TutorialDataService {
     }
 
     get(id) {
-        return http.get(`/tutorials/${id}`);
+        return http.get(`/tutorial/${id}`);
     }
 
     create(data) {
@@ -15,15 +15,15 @@ class TutorialDataService {
     }
     
     update(id,data) {
-        return http.put("/update", data);
+        return http.post("/update", data);
     }
 
     delete(id) {
-        return http.delete("/delete-tutorial",id);
+        return http.post("/delete-tutorial",id);
     }
 
     deleteAll() {
-        return http.delete(`/tutorials`);
+        return http.get(`/tutorials`);
     }
 
     findByTitle(title) {

@@ -1,6 +1,7 @@
 
 import React,{ Component } from "react";
 import { connect } from "react-redux";
+
 import {updateTutorial,deleteTutorial} from "../actions/tutorials";
 import TutorialDataService from "../services/tutorial.services";
 
@@ -14,10 +15,10 @@ class Tutorial extends Component {
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.getTutorial = this.getTutorial.bind(this);
         this.updateStatus = this.updateStatus.bind(this);
-        this.updateContent = this.updateConent.bind(this);
+        this.updateContent = this.updateContent.bind(this);
         this.state = {
             currentTutorial: {
-                id: null,
+                Id: null,
                 title: "",
                 description: "",
                 published: false
@@ -26,8 +27,10 @@ class Tutorial extends Component {
         };
     }
 
-    componentDidMount() {
-        this.getTutorial(this.props.match.params.id);
+    componentDidMount() {    
+        
+        const Id = window.location.pathname.split("/")[2];
+        this.getTutorial(Id);
     }
 
     onChangeTitle(e) {
@@ -57,7 +60,7 @@ class Tutorial extends Component {
         TutorialDataService.get(id)
         .then((response) =>{
             this.setState({
-                currentTutorial: response.data
+                currentTutorial: response.data.item.Item
             });
             console.log(response.data);
         })
@@ -66,13 +69,13 @@ class Tutorial extends Component {
         })
     }
 
-    updateStaus(status) {
+    updateStatus(status) {
 
         var data = {
-            id: this.state.currentTutorial.id,
+            id: this.state.currentTutorial.Id,
             title: this.state.currentTutorial.title,
             description: this.state.currentTutorial.description,
-            published: status
+            published: status.toString()
         };
 
         this.props.updateTutorial(data.id,data)
@@ -90,8 +93,8 @@ class Tutorial extends Component {
         })
     }
 
-    updateConent() {
-        this.props.updateTutorial(this.state.currentTutorial.id,this.state.currentTutorial)
+    updateContent() {
+        this.props.updateTutorial(this.state.currentTutorial.Id,this.state.currentTutorial)
         .then((response) => {
             console.log(response);
             this.setState({message: "The tutorial was updated successfully"});
@@ -101,9 +104,10 @@ class Tutorial extends Component {
         })
     }
 
-    removeTutorial() {
-        this.props.deleteTutorial(this.state.currentTutorial.id)
-        .then(() => {
+    removeTutorial(Id) {
+        this.props.deleteTutorial(this.state.currentTutorial.Id)
+        .then((response) => {
+            console.log(response);
             this.props.history.push("/tutorials");
         })
         .catch((e) => {
@@ -115,7 +119,7 @@ class Tutorial extends Component {
 
         const { currentTutorial } = this.state;
         return (
-            <div>
+            <div className="container">
                 {
                     currentTutorial ? (
                         <div className="edit-form">
@@ -132,7 +136,7 @@ class Tutorial extends Component {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="description">Descripion</label>
+                                    <label htmlFor="description">Description</label>
                                     <input
                                         type="text"
                                         className="form-control"
@@ -151,15 +155,14 @@ class Tutorial extends Component {
 
                             {currentTutorial.published ? (
                                 <button
-                                    className="badge badge-primary mr-2"
+                                    className="btn btn-warning m-2"
                                     onClick={() => this.updateStatus(false)}
                                 >
                                     Unpublish
                                 </button>
 
                             ) : (
-                                <button
-                                    className="badge badge-primary mr-2"
+                                <button className="btn btn-primary m-2"
                                     onClick={() => this.updateStatus(true)}
                                 >
                                     Publish
@@ -167,15 +170,15 @@ class Tutorial extends Component {
 
                             )}
                             <button
-                                className="badge badge-primary mr-2"
-                                onClick={() => this.removeTutorial}
+                                className="btn btn-danger m-2"
+                                onClick={() => this.removeTutorial(currentTutorial.Id)}
                             >
                                 Delete
                             </button>
 
                             <button
-                                className="badge badge-primary mr-2"
-                                onClick={() => this.updateConent}
+                                className="btn btn-primary m-2"
+                                onClick={() => this.updateContent()}
                             >
                                 Update
                             </button>
