@@ -5,8 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux';
 import store from './store';
-import { Header } from 'semantic-ui-react';
-
+import 'semantic-ui-css/semantic.min.css';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

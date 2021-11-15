@@ -6,7 +6,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import TutorialList from './components/tutorials-list.component';
 import AddTutorial from './components/add-tutorial.component';
 import Tutorial from './components/tutorial.component';
-import { Header } from 'semantic-ui-react'
+import $ from 'jquery';
+
+window.jQuery = $;
+window.$ = $;
+global.jQuery = $;
+
 function App() {
   return (
     <div className="App">
