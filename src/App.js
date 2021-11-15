@@ -6,10 +6,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import TutorialList from './components/tutorials-list.component';
 import AddTutorial from './components/add-tutorial.component';
 import Tutorial from './components/tutorial.component';
+import 'bootstrap';
 import $ from 'jquery';
 window.jQuery = window.$ = $;
-require('bootstrap');
-require('bootstrap-datepicker');
+
 
 function App() {
   return (
