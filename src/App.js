@@ -6,11 +6,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import TutorialList from './components/tutorials-list.component';
 import AddTutorial from './components/add-tutorial.component';
 import Tutorial from './components/tutorial.component';
+import { Header } from 'semantic-ui-react'
 function App() {
   return (
     <div className="App">
-      <header>
-      </header>     
+        
       <Router>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <Link to={"/"} className="navbar-brand">
