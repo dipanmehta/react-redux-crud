@@ -7,10 +7,9 @@ import TutorialList from './components/tutorials-list.component';
 import AddTutorial from './components/add-tutorial.component';
 import Tutorial from './components/tutorial.component';
 import $ from 'jquery';
-
-window.jQuery = $;
-window.$ = $;
-global.jQuery = $;
+window.jQuery = window.$ = $;
+require('bootstrap');
+require('bootstrap-datepicker');
 
 function App() {
   return (
